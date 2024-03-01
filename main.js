@@ -3,13 +3,11 @@ const { mcws, Events } = require('@hrtk92/mcwsjs')
 const os = require('os')
 const path = require('path')
 
-function getLocalIpAddress(){
+const mcserver = new mcws(function(){
 	const nets = os.networkInterfaces();
 	const net = nets["eth0"]?.find((v) => v.family == "IPv4");
 	return net.address;
-}
-
-const mcserver = new mcws(getLocalIpAddress(), 19131)
+}(), 19131)
 
 mcserver.onReady((host, port) => {
     console.log('Server started')
