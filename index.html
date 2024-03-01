@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mcws_blockly</title>
+<script src="blockly.min.js"></script>
+<script src="blocks_compressed.min.js"></script>
+<script src="javascript_compressed.min.js"></script>
+<!--script src="js-interpreter.min.js"></script-->
+<script src="sammon.js"></script>
+
+</head>
+<body>
+	<div id="blocklyDiv" style="width:800px;height:500px;"></div>
+	<button id="run">実行</button>
+	<script src="block.js"></script>
+	<script>	
+		var workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});
+
+		run.addEventListener("click", function(){
+			var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+			try {
+				eval(code);
+			} catch (error) {
+				alert("Code ERROR: " + error);
+			}
+			// var myInterpreter = new Interpreter(code);
+			// myInterpreter.run();
+
+			// function nextStep() {
+			// 	if (myInterpreter.step()) {
+			// 		setTimeout(nextStep, 10);
+			// 	}
+			// }
+		});
+	</script>
+</body>
+</html>
