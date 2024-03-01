@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path')
 const { mcws, Events } = require('@hrtk92/mcwsjs')
 
-const mcserver = new mcws('localhost', 8000)
+const mcserver = new mcws('localhost', 19131)
 
 mcserver.onReady((host, port) => {
     console.log('Server started')
