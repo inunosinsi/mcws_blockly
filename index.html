@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>mcws_blockly</title>
-<script src="blockly.min.js"></script>
-<script src="blocks_compressed.min.js"></script>
-<script src="javascript_compressed.min.js"></script>
-<!--script src="js-interpreter.min.js"></script-->
-<script src="sammon.js"></script>
+<script src="src/js/blockly.min.js"></script>
+<script src="src/js/blocks_compressed.min.js"></script>
+<script src="src/js/javascript_compressed.min.js"></script>
+<!--script src="src/js/js-interpreter.min.js"></script-->
+<script src="src/js/sammon.js"></script>
 
 </head>
 <body>
 	<div id="blocklyDiv" style="width:800px;height:500px;"></div>
 	<button id="run">実行</button>
-	<script src="block.js"></script>
+	<script src="src/js/block.js"></script>
 	<script>	
 		var workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});
 

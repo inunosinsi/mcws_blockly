@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path')
 const { mcws, Events } = require('@hrtk92/mcwsjs')
+const path = require('path')
 
 const mcserver = new mcws('localhost', 19131)
 
@@ -19,6 +19,11 @@ mcserver.onDisconnect(() => {
     console.log('Disconnected')
 })
 
+function sleepSync(ms) {
+    const start = Date.now();
+    while (Date.now() - start < ms) {}
+}
+
 const createWindow = () => {
 	const win = new BrowserWindow({
 		width: 800,
@@ -31,6 +36,10 @@ const createWindow = () => {
 
 	ipcMain.handle("sammon", async (_e, _arg) => {
 		mcserver.sendCommand('summon chicken ~ ~10 ~')
+	})
+
+	ipcMain.handle("sleep", async (_e, _arg) => {
+		sleepSync(1000);
 	})
 
 	//win.webContents.openDevTools({ mode: 'detach'})

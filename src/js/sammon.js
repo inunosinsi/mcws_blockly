@@ -13,9 +13,25 @@ Blockly.Blocks['sammon_call'] = {
 	}
 };
 
+Blockly.Blocks['sleep'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .appendField("1秒待つ");
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour(20);
+   this.setTooltip("");
+   this.setHelpUrl("");
+	}
+  };
+
 javascript.javascriptGenerator.forBlock['sammon_call'] = function(block, generator) {
 	var value_name = generator.valueToCode(block, 'NAME', javascript.Order.ATOMIC);
 	// TODO: Assemble javascript into code variable.
-	var code = 'window.mcwsApi.sammon();\n';
-	return code;
+	return 'window.mcwsApi.sammon();\n';
+  };
+
+  javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {
+	// TODO: Assemble javascript into code variable.
+	return 'window.mcwsApi.sleep();\n';
   };

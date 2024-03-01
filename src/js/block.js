@@ -16,6 +16,10 @@
 		{
 			"kind": "block",
 			"type": "math_number"
+		},
+		{
+			"kind": "block",
+			"type": "sleep"
 		}
 	]
 
