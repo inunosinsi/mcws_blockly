@@ -1,8 +1,15 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron')
 const { mcws, Events } = require('@hrtk92/mcwsjs')
+const os = require('os')
 const path = require('path')
 
-const mcserver = new mcws('localhost', 19131)
+function getLocalIpAddress(){
+	const nets = os.networkInterfaces();
+	const net = nets["eth0"]?.find((v) => v.family == "IPv4");
+	return net.address;
+}
+
+const mcserver = new mcws(getLocalIpAddress(), 19131)
 
 mcserver.onReady((host, port) => {
     console.log('Server started')

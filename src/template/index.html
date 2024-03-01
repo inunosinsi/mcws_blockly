@@ -7,7 +7,7 @@
 <script src="../js/blockly/blockly.min.js"></script>
 <script src="../js/blockly/blocks_compressed.min.js"></script>
 <script src="../js/blockly/javascript_compressed.min.js"></script>
-<!--script src="src/js/js-interpreter.min.js"></script-->
+<!--script src="../js/blockly/js-interpreter.min.js"></script-->
 <script src="../js/custom/sammon.js"></script>
 
 </head>
@@ -23,8 +23,8 @@
 
 			try {
 				eval(code);
-			} catch (error) {
-				alert("Code ERROR: " + error);
+			} catch (err) {
+				alert("Code ERROR: " + err);
 			}
 			// var myInterpreter = new Interpreter(code);
 			// myInterpreter.run();
