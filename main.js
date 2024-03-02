@@ -64,13 +64,10 @@ const createWindow = () => {
 	})
 
 	ipcMain.handle("execute_command", async (_e, _arg) => {
-		var command = _arg[0].replace("'", "");
-		var target = _arg[1].replace("'", "");
-		var entity = _arg[2].replace("'", "");
-		var x = _arg[3].replace("'", "");
-		var y = _arg[4].replace("'", "");
-		var z = _arg[5].replace("'", "");
-		mcserver.sendCommand(build_command(command, target, entity, x, y, z));
+		for(var _i = 0; _i < _arg.length; _i++){
+			_arg[_i] = _arg[_i].replace("'", "");
+		}
+		mcserver.sendCommand(build_command(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5]));
 	})
 
 	ipcMain.handle("sleep", async (_e, _arg) => {

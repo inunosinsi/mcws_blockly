@@ -9,11 +9,11 @@
  * @return string
  */
 function build_execute_command(command, target, entity, x, y, z){
-	var target = target.replace("'", "");
-	var entity = entity.replace("'", "");
-	var x = x.replace("'", "");
-	var y = y.replace("'", "");
-	var z = z.replace("'", "");
+	target = target.replace("'", "");
+	entity = entity.replace("'", "");
+	x = x.replace("'", "");
+	y = y.replace("'", "");
+	z = z.replace("'", "");
 	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+entity+'","'+x+'","'+y+'","'+z+'");\n';
 }
 
