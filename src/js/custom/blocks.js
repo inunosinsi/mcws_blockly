@@ -1,8 +1,27 @@
-Blockly.Blocks['sammon_call'] = {
+/**
+ * 
+ * @param {string} command 
+ * @param {string} target 
+ * @param {string} entity 
+ * @param {string} x 
+ * @param {string} y 
+ * @param {string} z 
+ * @return string
+ */
+function build_execute_command(command, target, entity, x, y, z){
+	var target = target.replace("'", "");
+	var entity = entity.replace("'", "");
+	var x = x.replace("'", "");
+	var y = y.replace("'", "");
+	var z = z.replace("'", "");
+	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+entity+'","'+x+'","'+y+'","'+z+'");\n';
+}
+
+Blockly.Blocks['summon_call'] = {
 	init: function() {
-	  this.appendValueInput("CMD")
+	  this.appendValueInput("ENTITY")
 		  .setCheck("String")
-		  .appendField(new Blockly.FieldLabelSerializable(""), "CMD");
+		  .appendField(new Blockly.FieldLabelSerializable(""), "ENTITY");
 	  this.appendEndRowInput()
 		  .appendField("を");
 	  this.appendDummyInput()
@@ -46,14 +65,13 @@ Blockly.Blocks['sleep'] = {
 	}
   };
 
-  javascript.javascriptGenerator.forBlock['sammon_call'] = function(block, generator) {
-	var value_cmd = generator.valueToCode(block, 'CMD', javascript.Order.ATOMIC);
+  javascript.javascriptGenerator.forBlock['summon_call'] = function(block, generator) {
+	var value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
 	var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
 	var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
 	var value_z = generator.valueToCode(block, 'Z', javascript.Order.ATOMIC);
-	// TODO: Assemble javascript into code variable.
-	return 'window.mcwsApi.sammon('+value_cmd+','+value_x+','+value_y+','+value_z+');\n';
-  };
+	return build_execute_command("summon", "", value_entity, value_x, value_y, value_z);
+};
   
   javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {
 	// TODO: Assemble javascript into code variable.

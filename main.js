@@ -24,9 +24,33 @@ mcserver.onDisconnect(() => {
     console.log('Disconnected')
 })
 
+/**
+ * 
+ * @param {int} ms
+ * @return void 
+ */
 function sleepSync(ms) {
     const start = Date.now();
     while (Date.now() - start < ms) {}
+}
+
+/**
+ * 
+ * @param {string} command
+ * @param {string} target 
+ * @param {string} entity
+ * @param {string} x	// x座標 実数 or ^ or ~で指定
+ * @param {string} y	// y座標 実数 or ^ or ~で指定
+ * @param {string} z	// z座標 実数 or ^ or ~で指定
+ * @returns string
+ */
+function build_command(command, target, entity, x, y, z){
+	cmd = command+" ";
+	if(target.length > 0) cmd += "@"+target+" ";
+	if(entity.length > 0) cmd += entity+" ";
+	cmd += x+" "+y+" "+z+" ";
+	cmd = cmd.trim();
+	return cmd;
 }
 
 const createWindow = () => {
@@ -39,8 +63,14 @@ const createWindow = () => {
 		}
 	})
 
-	ipcMain.handle("sammon", async (_e, _arg) => {
-		mcserver.sendCommand('summon '+_arg[0]+' '+_arg[1]+' '+_arg[2]+' '+_arg[3])
+	ipcMain.handle("execute_command", async (_e, _arg) => {
+		var command = _arg[0].replace("'", "");
+		var target = _arg[1].replace("'", "");
+		var entity = _arg[2].replace("'", "");
+		var x = _arg[3].replace("'", "");
+		var y = _arg[4].replace("'", "");
+		var z = _arg[5].replace("'", "");
+		mcserver.sendCommand(build_command(command, target, entity, x, y, z));
 	})
 
 	ipcMain.handle("sleep", async (_e, _arg) => {

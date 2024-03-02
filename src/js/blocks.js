@@ -7,9 +7,9 @@
 		},
 		{
 			"kind": "block",
-			"type": "sammon_call",
+			"type": "summon_call",
 			"inputs": {
-				"CMD": {
+				"ENTITY": {
 					"block": {
 						"type": "text",
 						"fields": {

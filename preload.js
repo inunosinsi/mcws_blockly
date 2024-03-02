@@ -1,6 +1,6 @@
 const { ipcRenderer, contextBridge } = require('electron');
 
 contextBridge.exposeInMainWorld("mcwsApi", {
-	sammon: (cmd, x, y, z) => ipcRenderer.invoke('sammon', [cmd, x, y, z]),
+	execute_command: (cmd, target, entity, x, y, z) => ipcRenderer.invoke('execute_command', [cmd, target, entity, x, y, z]),
 	sleep: () => ipcRenderer.invoke('sleep'),
 });
