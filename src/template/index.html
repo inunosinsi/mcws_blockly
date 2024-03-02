@@ -19,9 +19,11 @@
 	<script>	
 		var workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});
 
+		//workspace.addChangeListener(Blockly.Events.disableOrphans);
+
 		run.addEventListener("click", function(){
 			var code = Blockly.JavaScript.workspaceToCode(workspace);
-
+			
 			try {
 				eval(code);
 			} catch (err) {
