@@ -31,8 +31,8 @@ function sleepSync(ms) {
 
 const createWindow = () => {
 	const win = new BrowserWindow({
-		width: 800,
-		height: 600,
+		width: 700,
+		height:500,
 		title: 'mcws_blockly',
 		webPreferences: {
 			preload: path.join(__dirname, 'preload.js'),
@@ -40,7 +40,7 @@ const createWindow = () => {
 	})
 
 	ipcMain.handle("sammon", async (_e, _arg) => {
-		mcserver.sendCommand('summon chicken ~ ~10 ~')
+		mcserver.sendCommand('summon '+_arg[0]+' '+_arg[1]+' '+_arg[2]+' '+_arg[3])
 	})
 
 	ipcMain.handle("sleep", async (_e, _arg) => {
