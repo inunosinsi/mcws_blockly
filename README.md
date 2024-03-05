@@ -10,3 +10,6 @@ $ git clone git@github.com:inunosinsi/mcws_blockly.git
 $ cd mcws_blockly  
 $ yarn start  
 ```
+
+当プロジェクトの開発用のドキュメントは下記のURL先のページでまとめています。  
+[https://saitodev.co/microbit/#javascript](https://saitodev.co/microbit/#javascript)
