@@ -49,7 +49,7 @@ const createWindow = () => {
 		height:500,
 		title: 'mcws_blockly',
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js'),
+			preload: path.join(__dirname, 'src/js/preload.js'),
 		}
 	})
 
