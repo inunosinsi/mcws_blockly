@@ -17,7 +17,7 @@ function build_execute_command(command, target, entity, x, y, z){
 	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+entity+'","'+x+'","'+y+'","'+z+'");\n';
 }
 
-Blockly.Blocks['summon_call'] = {
+Blockly.Blocks['summon'] = {
 	init: function() {
 	  this.appendValueInput("ENTITY")
 		  .setCheck("String")
@@ -53,19 +53,22 @@ Blockly.Blocks['summon_call'] = {
 	}
   };
 
-Blockly.Blocks['sleep'] = {
+  Blockly.Blocks['sleep'] = {
 	init: function() {
-	  this.appendDummyInput()
-		  .appendField("1秒待つ");
-	  this.setPreviousStatement(true, null);
-	  this.setNextStatement(true, null);
-	  this.setColour(20);
-   this.setTooltip("");
-   this.setHelpUrl("");
+		this.appendValueInput("SEC")
+		  .setCheck("Number")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "SEC");
+		this.appendDummyInput()
+		  .appendField("秒待つ");
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(230);
+		this.setTooltip("");
+		this.setHelpUrl("");
 	}
-  };
+};
 
-  javascript.javascriptGenerator.forBlock['summon_call'] = function(block, generator) {
+javascript.javascriptGenerator.forBlock['summon'] = function(block, generator) {
 	var value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
 	var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
 	var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
@@ -73,7 +76,9 @@ Blockly.Blocks['sleep'] = {
 	return build_execute_command("summon", "", value_entity, value_x, value_y, value_z);
 };
   
-  javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {
+javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {
 	// TODO: Assemble javascript into code variable.
-	return 'window.mcwsApi.sleep();\n';
-  };
+	var value_sec = generator.valueToCode(block, 'SEC', javascript.Order.ATOMIC);
+	var code = '(function(ms) {var start = Date.now();while(Date.now() - start < ms){}})('+(parseInt(value_sec)*1000)+');\n';
+	return code;
+};

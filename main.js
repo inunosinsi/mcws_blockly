@@ -26,16 +26,6 @@ mcserver.onDisconnect(() => {
 
 /**
  * 
- * @param {int} ms
- * @return void 
- */
-function sleepSync(ms) {
-    const start = Date.now();
-    while (Date.now() - start < ms) {}
-}
-
-/**
- * 
  * @param {string} command
  * @param {string} target 
  * @param {string} entity
@@ -68,10 +58,6 @@ const createWindow = () => {
 			_arg[_i] = _arg[_i].replace("'", "");
 		}
 		mcserver.sendCommand(build_command(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5]));
-	})
-
-	ipcMain.handle("sleep", async (_e, _arg) => {
-		sleepSync(1000);
 	})
 
 	//win.webContents.openDevTools({ mode: 'detach'})

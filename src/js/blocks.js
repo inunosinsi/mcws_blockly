@@ -7,7 +7,7 @@
 		},
 		{
 			"kind": "block",
-			"type": "summon_call",
+			"type": "summon",
 			"inputs": {
 				"ENTITY": {
 					"block": {
@@ -63,7 +63,17 @@
 		},
 		{
 			"kind": "block",
-			"type": "sleep"
+			"type": "sleep",
+			"inputs": {
+				"SEC": {
+					"block": {
+						"type": "math_number",
+						"fields": {
+							"NUM": 1
+						}
+					}
+				},
+			}
 		}
 	]
 
