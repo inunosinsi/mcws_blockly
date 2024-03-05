@@ -4,7 +4,12 @@
 [クロスティーニに最新版のNode.jsをインストールする](https://saitodev.co/microbit/chromebook/article/66)  
 [クロームブックのマインクラフトでmcws.jsを使ってみる](https://saitodev.co/microbit/chromebook/article/80)  
   
-下記のコマンドを実行します。  
-$ yarn init  
-$ yarn add --dev electron  
-$ yarn add @hrtk92/mcwsjs  
+プロジェクト用のディレクトリを作成して移動した後、下記のコマンドを実行します。  
+```
+$ git clone git@github.com:inunosinsi/mcws_blockly.git  
+$ cd mcws_blockly  
+$ yarn start  
+```
+
+当プロジェクトの開発用のドキュメントは下記のURL先のページでまとめています。  
+[https://saitodev.co/microbit/#javascript](https://saitodev.co/microbit/#javascript)
