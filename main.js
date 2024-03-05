@@ -48,6 +48,7 @@ const createWindow = () => {
 		width: 700,
 		height:500,
 		title: 'mcws_blockly',
+		autoHideMenuBar: true,
 		webPreferences: {
 			preload: path.join(__dirname, 'src/js/preload.js'),
 		}
