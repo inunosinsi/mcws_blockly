@@ -38,7 +38,11 @@ function build_command(command, target, entity, x, y, z){
 	cmd = command+" ";
 	if(target.length > 0) cmd += "@"+target+" ";
 	if(entity.length > 0) cmd += entity+" ";
-	cmd += x+" "+y+" "+z+" ";
+	if(x.length > 0) {
+		if(y.length <= 0) y = "^";
+		if(y.length <= 0) z = "^";
+		cmd += x+" "+y+" "+z+" ";
+	}
 	cmd = cmd.trim();
 	return cmd;
 }

@@ -53,6 +53,37 @@ Blockly.Blocks['summon'] = {
 	}
   };
 
+  Blockly.Blocks['teleport'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .appendField("X：");
+	  this.appendValueInput("X")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "X");
+	  this.appendEndRowInput();
+	  this.appendDummyInput()
+		  .appendField("Y：");
+	  this.appendValueInput("Y")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "Y");
+	  this.appendEndRowInput();
+	  this.appendDummyInput()
+		  .appendField("Z：");
+	  this.appendValueInput("Z")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "Z");
+	  this.appendEndRowInput();
+	  this.appendEndRowInput()
+		  .appendField("の位置にテレポートする");
+	  this.setInputsInline(true);
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour(20);
+   this.setTooltip("");
+   this.setHelpUrl("");
+	}
+  };
+
   Blockly.Blocks['sleep'] = {
 	init: function() {
 		this.appendValueInput("SEC")
@@ -75,6 +106,14 @@ javascript.javascriptGenerator.forBlock['summon'] = function(block, generator) {
 	var value_z = generator.valueToCode(block, 'Z', javascript.Order.ATOMIC);
 	return build_execute_command("summon", "", value_entity, value_x, value_y, value_z);
 };
+
+javascript.javascriptGenerator.forBlock['teleport'] = function(block, generator) {
+	var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
+	var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
+	var value_z = generator.valueToCode(block, 'Z', javascript.Order.ATOMIC);
+	// TODO: Assemble javascript into code variable.
+	return build_execute_command("tp", "s", "", value_x, value_y, value_z);
+  };
   
 javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {
 	// TODO: Assemble javascript into code variable.

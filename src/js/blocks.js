@@ -83,6 +83,36 @@
 						},
 					}
 				},
+				{
+					"kind": "block",
+					"type": "teleport",
+					"inputs": {
+						"X": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": "^"
+								}
+							}
+						},
+						"Y": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": "^"
+								}
+							}
+						},
+						"Z": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": "^"
+								}
+							}
+						},
+					}
+				},
 			]
 		},
 		{
