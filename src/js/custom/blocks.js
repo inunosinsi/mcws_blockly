@@ -2,19 +2,21 @@
  * 
  * @param {string} command 
  * @param {string} target 
- * @param {string} entity 
+ * @param {string} type 
+ * @param {string} entity
  * @param {string} x 
  * @param {string} y 
  * @param {string} z 
  * @return string
  */
-function build_execute_command(command, target, entity, x, y, z){
+function build_execute_command(command, target, type, entity, x, y, z){
 	target = target.replace("'", "");
+	type = type.replace("'", "");
 	entity = entity.replace("'", "");
 	x = x.replace("'", "");
 	y = y.replace("'", "");
 	z = z.replace("'", "");
-	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+entity+'","'+x+'","'+y+'","'+z+'");\n';
+	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+type+'","'+entity+'","'+x+'","'+y+'","'+z+'");\n';
 }
 
 Blockly.Blocks['summon'] = {
@@ -84,6 +86,24 @@ Blockly.Blocks['summon'] = {
 	}
   };
 
+  Blockly.Blocks['locate'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .appendField(new Blockly.FieldDropdown([["バイオーム","biome"], ["構造物","structure"]]), "TYPE");
+	  this.appendValueInput("ENTITY")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "ENTITY");
+	  this.appendDummyInput()
+		  .appendField("の位置を調べる");
+	  this.setInputsInline(true);
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour(20);
+   this.setTooltip("");
+   this.setHelpUrl("");
+	}
+  };
+
   Blockly.Blocks['sleep'] = {
 	init: function() {
 		this.appendValueInput("SEC")
@@ -104,7 +124,7 @@ javascript.javascriptGenerator.forBlock['summon'] = function(block, generator) {
 	var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
 	var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
 	var value_z = generator.valueToCode(block, 'Z', javascript.Order.ATOMIC);
-	return build_execute_command("summon", "", value_entity, value_x, value_y, value_z);
+	return build_execute_command("summon", "", "", value_entity, value_x, value_y, value_z);
 };
 
 javascript.javascriptGenerator.forBlock['teleport'] = function(block, generator) {
@@ -112,7 +132,14 @@ javascript.javascriptGenerator.forBlock['teleport'] = function(block, generator)
 	var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
 	var value_z = generator.valueToCode(block, 'Z', javascript.Order.ATOMIC);
 	// TODO: Assemble javascript into code variable.
-	return build_execute_command("tp", "s", "", value_x, value_y, value_z);
+	return build_execute_command("tp", "s", "", "", value_x, value_y, value_z);
+  };
+
+  javascript.javascriptGenerator.forBlock['locate'] = function(block, generator) {
+	var dropdown_type = block.getFieldValue('TYPE');
+	var value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
+	// TODO: Assemble javascript into code variable.
+	return build_execute_command("locate", "", dropdown_type, value_entity, "", "", "");
   };
   
 javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {

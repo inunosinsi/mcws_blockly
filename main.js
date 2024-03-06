@@ -28,22 +28,25 @@ mcserver.onDisconnect(() => {
  * 
  * @param {string} command
  * @param {string} target 
- * @param {string} entity
+ * @param {string} type
+ * @param {string} id
  * @param {string} x	// x座標 実数 or ^ or ~で指定
  * @param {string} y	// y座標 実数 or ^ or ~で指定
  * @param {string} z	// z座標 実数 or ^ or ~で指定
  * @returns string
  */
-function build_command(command, target, entity, x, y, z){
+function build_command(command, target, type, id, x, y, z){
 	cmd = command+" ";
 	if(target.length > 0) cmd += "@"+target+" ";
-	if(entity.length > 0) cmd += entity+" ";
+	if(type.length > 0) cmd += type+" ";
+	if(id.length > 0) cmd += id+" ";
 	if(x.length > 0) {
 		if(y.length <= 0) y = "^";
 		if(y.length <= 0) z = "^";
 		cmd += x+" "+y+" "+z+" ";
 	}
 	cmd = cmd.trim();
+	console.log(cmd);
 	return cmd;
 }
 
@@ -63,7 +66,7 @@ const createWindow = () => {
 		for(var _i = 0; _i < _arg.length; _i++){
 			_arg[_i] = _arg[_i].replace("'", "");
 		}
-		mcserver.sendCommand(build_command(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5]));
+		mcserver.sendCommand(build_command(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5], _arg[6]));
 	})
 
 	//win.webContents.openDevTools({ mode: 'detach'})

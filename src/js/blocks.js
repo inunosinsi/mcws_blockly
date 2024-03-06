@@ -113,6 +113,20 @@
 						},
 					}
 				},
+				{
+					"kind": "block",
+					"type": "locate",
+					"inputs": {
+						"ENTITY": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": ""
+								}
+							}
+						}
+					}
+				},
 			]
 		},
 		{
