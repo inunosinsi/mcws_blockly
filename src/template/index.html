@@ -10,11 +10,19 @@
 <script src="../js/blockly/msg/ja.min.js"></script>
 <!--script src="../js/blockly/js-interpreter.min.js"></script-->
 <script src="../js/custom/blocks.js"></script>
+<style>
+body{
+    overflow: hidden;
+}
+</style>
 
 </head>
 <body>
-	<div id="blocklyDiv" style="width:700px;height:400px;"></div>
-	<button id="run">実行</button>
+	<div id="blocklyDiv" style="width:100%;height:420px;"></div>
+	<div style="width:100%;padding:5px;text-align:center;">
+		<button id="run" style="margin-top:10px;padding:5px 20px;">実行</button>
+	</div>
+	
 	<script src="../js/blocks.js"></script>
 	<script>	
 		var workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});

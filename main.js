@@ -45,10 +45,11 @@ function build_command(command, target, entity, x, y, z){
 
 const createWindow = () => {
 	const win = new BrowserWindow({
-		width: 700,
+		width:700,
 		height:500,
 		title: 'mcws_blockly',
 		autoHideMenuBar: true,
+		useContentSize: true,
 		webPreferences: {
 			preload: path.join(__dirname, 'src/js/preload.js'),
 		}
