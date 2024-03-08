@@ -3,20 +3,20 @@
  * @param {string} command 
  * @param {string} target 
  * @param {string} type 
- * @param {string} entity
+ * @param {string} id
  * @param {string} x 
  * @param {string} y 
  * @param {string} z 
  * @return string
  */
-function build_execute_command(command, target, type, entity, x, y, z){
+function build_execute_command(command, target, type, id, x, y, z){
 	target = target.replace("'", "");
 	type = type.replace("'", "");
-	entity = entity.replace("'", "");
+	id = id.replace("'", "");
 	x = x.replace("'", "");
 	y = y.replace("'", "");
 	z = z.replace("'", "");
-	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+type+'","'+entity+'","'+x+'","'+y+'","'+z+'");\n';
+	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+type+'","'+id+'","'+x+'","'+y+'","'+z+'");\n';
 }
 
 Blockly.Blocks['summon'] = {
@@ -104,6 +104,42 @@ Blockly.Blocks['summon'] = {
 	}
   };
 
+  Blockly.Blocks['setblock'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .appendField("X：");
+	  this.appendValueInput("X")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "X");
+	  this.appendEndRowInput();
+	  this.appendDummyInput()
+		  .appendField("Y：");
+	  this.appendValueInput("Y")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "Y");
+	  this.appendEndRowInput();
+	  this.appendDummyInput()
+		  .appendField("Z：");
+	  this.appendValueInput("Z")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "Z");
+	  this.appendEndRowInput();
+	  this.appendDummyInput()
+		  .appendField("の位置に");
+	  this.appendValueInput("BLOCK")
+		  .setCheck("String")
+		  .appendField(new Blockly.FieldLabelSerializable(""), "BLOCK");
+	  this.appendDummyInput()
+		  .appendField("を置く");
+	  this.setInputsInline(true);
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour(20);
+   this.setTooltip("");
+   this.setHelpUrl("");
+	}
+  };
+
   Blockly.Blocks['sleep'] = {
 	init: function() {
 		this.appendValueInput("SEC")
@@ -140,6 +176,15 @@ javascript.javascriptGenerator.forBlock['teleport'] = function(block, generator)
 	var value_entity = generator.valueToCode(block, 'ENTITY', javascript.Order.ATOMIC);
 	// TODO: Assemble javascript into code variable.
 	return build_execute_command("locate", "", dropdown_type, value_entity, "", "", "");
+  };
+
+  javascript.javascriptGenerator.forBlock['setblock'] = function(block, generator) {
+	var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
+	var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
+	var value_z = generator.valueToCode(block, 'Z', javascript.Order.ATOMIC);
+	var value_block = generator.valueToCode(block, 'BLOCK', javascript.Order.ATOMIC);
+	// TODO: Assemble javascript into code variable.
+	return build_execute_command("setblock", "", "", value_block, value_x, value_y, value_z);
   };
   
 javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {

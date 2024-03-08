@@ -127,6 +127,44 @@
 						}
 					}
 				},
+				{
+					"kind": "block",
+					"type": "setblock",
+					"inputs": {
+						"X": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": "^"
+								}
+							}
+						},
+						"Y": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": "^"
+								}
+							}
+						},
+						"Z": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": "^"
+								}
+							}
+						},
+						"BLOCK": {
+							"block": {
+								"type": "text",
+								"fields": {
+									"TEXT": "stone"
+								}
+							}
+						},
+					}
+				},
 			]
 		},
 		{

@@ -37,14 +37,27 @@ mcserver.onDisconnect(() => {
  */
 function build_command(command, target, type, id, x, y, z){
 	cmd = command+" ";
-	if(target.length > 0) cmd += "@"+target+" ";
-	if(type.length > 0) cmd += type+" ";
-	if(id.length > 0) cmd += id+" ";
-	if(x.length > 0) {
-		if(y.length <= 0) y = "^";
-		if(y.length <= 0) z = "^";
-		cmd += x+" "+y+" "+z+" ";
+	switch(command){
+		case "setblock":
+			if(x.length > 0) {
+				if(y.length <= 0) y = "^";
+				if(y.length <= 0) z = "^";
+				cmd += x+" "+y+" "+z+" ";
+			}
+			if(id.length > 0) cmd += id+" ";
+			break;
+		default:
+			if(target.length > 0) cmd += "@"+target+" ";
+			if(type.length > 0) cmd += type+" ";
+			if(id.length > 0) cmd += id+" ";
+			if(x.length > 0) {
+				if(y.length <= 0) y = "^";
+				if(y.length <= 0) z = "^";
+				cmd += x+" "+y+" "+z+" ";
+			}
+			break;
 	}
+	
 	cmd = cmd.trim();
 	console.log(cmd);
 	return cmd;
