@@ -1,5 +1,7 @@
-# mcws_blockly
+# mcws_blockly  
 
+![mcws_blockly_tmb](https://www.youtube.com/watch?v=aGijDG9KOVQ)  
+  
 下記のURLを参考にして、最新版のNode.jsとYarnをインストールしてください。  
 [クロスティーニに最新版のNode.jsをインストールする](https://saitodev.co/microbit/chromebook/article/66)  
 [クロームブックのマインクラフトでmcws.jsを使ってみる](https://saitodev.co/microbit/chromebook/article/80)  
