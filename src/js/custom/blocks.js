@@ -140,6 +140,17 @@ Blockly.Blocks['summon'] = {
 	}
   };
 
+  Blockly.Blocks['start'] = {
+	init: function() {
+		this.appendDummyInput()
+		  .appendField("実行ボタンを押した時");
+		this.setNextStatement(true, null);
+		this.setColour(230);
+		this.setTooltip("");
+		this.setHelpUrl("");
+	}
+  }
+
   Blockly.Blocks['sleep'] = {
 	init: function() {
 		this.appendValueInput("SEC")
@@ -186,6 +197,12 @@ javascript.javascriptGenerator.forBlock['teleport'] = function(block, generator)
 	// TODO: Assemble javascript into code variable.
 	return build_execute_command("setblock", "", "", value_block, value_x, value_y, value_z);
   };
+
+javascript.javascriptGenerator.forBlock['start'] = function(block, generator) {
+	// TODO: Assemble javascript into code variable.
+	var code = '// This block is a starting block.\n';
+	return code;
+};
   
 javascript.javascriptGenerator.forBlock['sleep'] = function(block, generator) {
 	// TODO: Assemble javascript into code variable.

@@ -40,7 +40,9 @@ body{
      		trashcan: true
 		});
 
-		//workspace.addChangeListener(Blockly.Events.disableOrphans);
+		Blockly.serialization.workspaces.load({"blocks":{"blocks":[{"type":"start", "x":120, "y":50}]}}, workspace);
+
+		workspace.addChangeListener(Blockly.Events.disableOrphans);
 
 		run.addEventListener("click", function(){
 			var code = Blockly.JavaScript.workspaceToCode(workspace);

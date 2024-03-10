@@ -3,6 +3,16 @@
 	"contents": [
 		{
 			"kind": "category",
+			"name": "Event",
+			"contents": [
+				{
+					"kind": "block",
+					"type": "start",
+				},
+			]
+		},
+		{
+			"kind": "category",
 			"name": "Control",
 			"contents": [
 				{
