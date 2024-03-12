@@ -46,20 +46,14 @@ body{
 
 		run.addEventListener("click", function(){
 			var code = Blockly.JavaScript.workspaceToCode(workspace);
-			
+			//var myInterpreter = new Interpreter(code);
+			//myInterpreter.run();
+
 			try {
 				eval(code);
 			} catch (err) {
 				alert("Code ERROR: " + err);
 			}
-			// var myInterpreter = new Interpreter(code);
-			// myInterpreter.run();
-
-			// function nextStep() {
-			// 	if (myInterpreter.step()) {
-			// 		setTimeout(nextStep, 10);
-			// 	}
-			// }
 		});
 	</script>
 </body>
