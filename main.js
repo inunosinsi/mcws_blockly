@@ -3,6 +3,8 @@ const { mcws, Events } = require('@hrtk92/mcwsjs')
 const os = require('os')
 const path = require('path')
 
+let isConnect = false
+
 const mcserver = new mcws(function(){
 	const nets = os.networkInterfaces();
 	const net = nets["eth0"]?.find((v) => v.family == "IPv4");
@@ -17,11 +19,12 @@ mcserver.onReady((host, port) => {
 mcserver.onConnection(() => {
     console.log('Connected to Minecraft')
     mcserver.sendCommand('say Connected') // send command
-    mcserver.subscribe(Events.PlayerMessage) // register events to receive
+    isConnect = true
 })
 
 mcserver.onDisconnect(() => {
     console.log('Disconnected')
+	isConnect = false
 })
 
 /**
@@ -59,7 +62,6 @@ function build_command(command, target, type, id, x, y, z){
 	}
 	
 	cmd = cmd.trim();
-	console.log(cmd);
 	return cmd;
 }
 
@@ -79,7 +81,13 @@ const createWindow = () => {
 		for(var _i = 0; _i < _arg.length; _i++){
 			_arg[_i] = _arg[_i].replace("'", "");
 		}
-		mcserver.sendCommand(build_command(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5], _arg[6]));
+		cmd = build_command(_arg[0], _arg[1], _arg[2], _arg[3], _arg[4], _arg[5], _arg[6]);
+		if(isConnect){
+			mcserver.sendCommand(cmd);
+		}else{
+			console.log("Debug:["+cmd+"]")
+		}
+		
 	})
 
 	//win.webContents.openDevTools({ mode: 'detach'})
