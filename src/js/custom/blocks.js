@@ -16,7 +16,7 @@ function build_execute_command(command, target, type, id, x, y, z){
 	x = x.replace("'", "");
 	y = y.replace("'", "");
 	z = z.replace("'", "");
-	return 'window.mcwsApi.execute_command("'+command+'","'+target+'","'+type+'","'+id+'","'+x+'","'+y+'","'+z+'");\n';
+	return 'send("'+command+'","'+target+'","'+type+'","'+id+'","'+x+'","'+y+'","'+z+'");\n';
 }
 
 Blockly.Blocks['summon'] = {

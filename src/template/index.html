@@ -8,7 +8,7 @@
 <script src="../js/blockly/blocks_compressed.min.js"></script>
 <script src="../js/blockly/javascript_compressed.min.js"></script>
 <script src="../js/blockly/msg/ja.min.js"></script>
-<!--script src="../js/blockly/js-interpreter.min.js"></script-->
+<script src="../js/blockly/js-interpreter.min.js"></script>
 <script src="../js/custom/blocks.js"></script>
 <style>
 body{
@@ -24,7 +24,8 @@ body{
 	</div>
 	
 	<script src="../js/blocks.js"></script>
-	<script>	
+	<script src="../js/interpreter.js"></script>
+	<script>
 		var workspace = Blockly.inject('blocklyDiv', {
 			// https://developers.google.com/blockly/guides/configure/web/configuration_struct
 			toolbox: toolbox,
@@ -40,20 +41,16 @@ body{
      		trashcan: true
 		});
 
+		// 実行時にstartブロックを設置しておく
 		Blockly.serialization.workspaces.load({"blocks":{"blocks":[{"type":"start", "x":120, "y":50}]}}, workspace);
 
+		// 繋がっていないブロックは実行時に対象外にする
 		workspace.addChangeListener(Blockly.Events.disableOrphans);
 
 		run.addEventListener("click", function(){
 			var code = Blockly.JavaScript.workspaceToCode(workspace);
-			//var myInterpreter = new Interpreter(code);
-			//myInterpreter.run();
-
-			try {
-				eval(code);
-			} catch (err) {
-				alert("Code ERROR: " + err);
-			}
+			var myInterpreter = new Interpreter(code, initApi);
+			myInterpreter.run();
 		});
 	</script>
 </body>
