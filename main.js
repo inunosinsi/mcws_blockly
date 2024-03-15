@@ -1,9 +1,10 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const { mcws, Events } = require('@hrtk92/mcwsjs')
 const os = require('os')
 const path = require('path')
 
 let isConnect = false
+let ws_connect_cmd
 
 const mcserver = new mcws(function(){
 	const nets = os.networkInterfaces();
@@ -13,7 +14,8 @@ const mcserver = new mcws(function(){
 
 mcserver.onReady((host, port) => {
     console.log('Server started')
-    console.log(`/wsserver ${host}:${port}`)
+	ws_connect_cmd = "/connect "+host+":"+port
+    console.log(ws_connect_cmd)
 })
 
 mcserver.onConnection(() => {
@@ -87,7 +89,13 @@ const createWindow = () => {
 		}else{
 			console.log("Debug:["+cmd+"]")
 		}
-		
+	})
+
+	ipcMain.handle("open_ws_dialog", async (_e, _arg) => {
+		return dialog
+		  .showMessageBoxSync(win, {
+			message: ws_connect_cmd,
+		})
 	})
 
 	//win.webContents.openDevTools({ mode: 'detach'})
