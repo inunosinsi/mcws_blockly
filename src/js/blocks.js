@@ -329,5 +329,15 @@
 				}
 			]
 		},
+		{
+			"kind": "category",
+			"name": "変数",
+			"custom": "VARIABLE_DYNAMIC"
+		},
+		{
+			"kind": "category",
+			"name": "関数",
+			"custom": "PROCEDURE"
+		}
 	]
 }
