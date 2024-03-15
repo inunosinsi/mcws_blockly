@@ -49,6 +49,16 @@ body{
 			window.mcwsApi.open_ws_dialog();
 		});
 
+		window.mcwsApi.receive_connect_status( (status) => {
+			console.log(status)
+			let wsicon = document.querySelector("#ws_msg_box")
+			if(status == 1){
+				wsicon.src = "../img/ico_c.jpg";
+			}else{
+				wsicon.src = "../img/ico_e.jpg";
+			}
+		})
+
 		// 実行時にstartブロックを設置しておく
 		Blockly.serialization.workspaces.load({"blocks":{"blocks":[{"type":"start", "x":120, "y":50}]}}, workspace);
 

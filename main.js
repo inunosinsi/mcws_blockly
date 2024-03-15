@@ -1,33 +1,10 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
-const { mcws, Events } = require('@hrtk92/mcwsjs')
+const { mcws } = require('@hrtk92/mcwsjs')
 const os = require('os')
 const path = require('path')
 
 let isConnect = false
 let ws_connect_cmd
-
-const mcserver = new mcws(function(){
-	const nets = os.networkInterfaces();
-	const net = nets["eth0"]?.find((v) => v.family == "IPv4");
-	return net.address;
-}(), 19131)
-
-mcserver.onReady((host, port) => {
-    console.log('Server started')
-	ws_connect_cmd = "/connect "+host+":"+port
-    console.log(ws_connect_cmd)
-})
-
-mcserver.onConnection(() => {
-    console.log('Connected to Minecraft')
-    mcserver.sendCommand('say Connected') // send command
-    isConnect = true
-})
-
-mcserver.onDisconnect(() => {
-    console.log('Disconnected')
-	isConnect = false
-})
 
 /**
  * 
@@ -94,15 +71,43 @@ const createWindow = () => {
 	ipcMain.handle("open_ws_dialog", async (_e, _arg) => {
 		return dialog
 		  .showMessageBoxSync(win, {
-			message: ws_connect_cmd,
+			message: "Minecraftのチャットとコマンドで下記のコマンドを入力してください\n"+ws_connect_cmd,
 		})
 	})
 
 	//win.webContents.openDevTools({ mode: 'detach'})
 	win.loadFile('src/template/index.html')
+
+	/** mcws.js **/
+
+	const mcserver = new mcws(function(){
+		const nets = os.networkInterfaces();
+		const net = nets["eth0"]?.find((v) => v.family == "IPv4");
+		return net.address;
+	}(), 19131)
+	
+	mcserver.onReady((host, port) => {
+		console.log('Server started')
+		ws_connect_cmd = "/connect "+host+":"+port
+		console.log(ws_connect_cmd)
+	})
+	
+	mcserver.onConnection(() => {
+		console.log('Connected to Minecraft')
+		mcserver.sendCommand('say Connected') // send command
+		isConnect = true
+		win.webContents.send('connect_status', 1)
+	})
+	
+	mcserver.onDisconnect(() => {
+		console.log('Disconnected')
+		isConnect = false
+		win.webContents.send('connect_status', 0)
+	})
+
+	mcserver.createServer()
 }
 
 app.whenReady().then(() => {
-	mcserver.createServer() // start the server
 	createWindow()
 })
