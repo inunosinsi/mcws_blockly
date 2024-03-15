@@ -19,12 +19,10 @@ body{
 </head>
 <body>
 	<div>
-		<img src="../img/ico_e.jpg" id="ws_msg_box">
+		<img src="../img/ico_e.jpg" id="ws_msg_box">&nbsp;
+		<img src="../img/ico_p.jpg" id="run">
 	</div>
-	<div id="blocklyDiv" style="width:100%;height:400px;"></div>
-	<div style="width:100%;padding:5px;text-align:center;">
-		<button id="run" style="margin-top:10px;padding:5px 20px;">実行</button>
-	</div>
+	<div id="blocklyDiv" style="width:100%;height:450px;"></div>
 	
 	<script src="../js/blocks.js"></script>
 	<script src="../js/custom/interpreter.js"></script>
@@ -65,7 +63,7 @@ body{
 		// 繋がっていないブロックは実行時に対象外にする
 		workspace.addChangeListener(Blockly.Events.disableOrphans);
 
-		run.addEventListener("click", () => {
+		document.querySelector("#run").addEventListener("click", () => {
 			var code = Blockly.JavaScript.workspaceToCode(workspace);
 			var myInterpreter = new Interpreter(code, initApi);
 			myInterpreter.run();

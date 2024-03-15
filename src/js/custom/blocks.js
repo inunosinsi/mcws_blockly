@@ -143,7 +143,7 @@ Blockly.Blocks['summon'] = {
   Blockly.Blocks['start'] = {
 	init: function() {
 		this.appendDummyInput()
-		  .appendField("実行ボタンを押した時");
+		  .appendField("▶を押した時");
 		this.setNextStatement(true, null);
 		this.setColour(230);
 		this.setTooltip("");
