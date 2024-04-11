@@ -9,7 +9,8 @@
 プロジェクト用のディレクトリを作成して移動した後、下記のコマンドを実行します。  
 ```
 $ git clone git@github.com:inunosinsi/mcws_blockly.git  
-$ cd mcws_blockly  
+$ cd mcws_blockly
+$ yarn add --dev electron  
 $ yarn start  
 ```
 
